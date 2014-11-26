@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User management</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+        <script src="js/userapp.js"></script>
+        <script src="/js/userapp.js"></script>
+    </head>
+    <body ng-app="UserApp">
+        <div>
+            <ul>
+                <li><a href="#/users/add">Add New User</a></li>
+                <li><a href="#/users/list">Show All Users</a></li>
+            </ul>
+        </div>
+        <!-- ng-view directive to tell AngularJS where to inject content pages -->
+        <div ng-view></div>
+    </body>
+</html>
