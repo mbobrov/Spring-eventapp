@@ -1,0 +1,39 @@
+<div>
+    <form name="eventData" action="#" ng-controller="EventController">
+
+        Event name:    <br/>
+        <span ng-show="eventData.name.$error.server">
+            <ul>
+                <li ng-repeat="msg in eventData.name.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Participants:    <input type="text" name="participants"
+            ng-options="participant.name for participant in participants" placeholder="Enter name" checkName>
+        <input type="button" value="Search" ng-click="searchPerformer()" />
+        <input type="button" value="Add" ng-click="addParticipant()" />
+        <br/>
+        <span ng-show="eventData.participants.$error.server">
+            <ul>
+                <li ng-repeat="msg in eventData.participants.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Last name:    <input type="text" name="lastname" ng-model="form.lastname">    <br/>
+        <span ng-show="eventData.lastname.$error.server">
+            <ul>
+                <li ng-repeat="msg in eventData.lastname.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Email Address: <input type="text" name="email" ng-model="form.email"><br/>
+        <span ng-show="eventData.email.$error.server">
+            <ul>
+                <li ng-repeat="msg in eventData.email.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        <input type="submit" ng-click="submitEvent($event)">
+
+    </form>
+</div>

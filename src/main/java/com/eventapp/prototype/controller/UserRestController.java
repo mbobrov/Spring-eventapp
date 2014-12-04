@@ -39,6 +39,11 @@ public class UserRestController {
         return u;
     }
 
+    @RequestMapping(value = "/username/{name}", method = RequestMethod.GET)
+    public Boolean checkUserName(@PathVariable String name) {
+        return new Boolean(userService.checkName(name));
+    }
+
     @RequestMapping(value = "/user/{id}", method = RequestMethod.PUT)
     public User saveUser(@PathVariable Long id, @RequestBody @Valid final User form) {//}, BindingResult result) {
         LOGGER.debug("Received request to create User with id {} and data={}", id, form);

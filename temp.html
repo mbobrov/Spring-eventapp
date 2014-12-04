@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>User management</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+        <script>
+var myApp = angular.module('myApp',[]);
+
+myApp.controller('UserController', ['$scope', '$http', '$location', '$parse',
+    function UserController($scope, $http, $location, $parse) {
+        $scope.form = {};
+
+        $scope.createUser = function() {
+            console.log("Create user with data:"+JSON.stringify($scope.form)+"|");
+        };
+
+        $scope.editUser = function(id) {
+            console.log(" - Edit User "+id+"CALL!");
+        };
+
+        $scope.saveUser = function() {
+            console.log(" - Save User "+JSON.stringify($scope.user)+" CALL!");
+        };
+
+        $scope.deleteUser = function(id) {
+            console.log("Location:"+$location.path());
+            console.log(" - Delete User "+id+"CALL!");
+        };
+
+        $scope.userCheck = function() {
+            console.log("Name:"+$scope.form.name);
+            var valid, value = $scope.form.name;
+            if(value){
+                valid = (value == 'user1' || value == 'user2') ? "true" : "false";
+                $scope.userData.name.$error.invalidName = (valid === "true");
+                console.log("check:"+(valid === "true"));
+            }
+        };
+    }
+]);
+
+myApp.directive('ngUnique', function () {
+  return {
+      restrict: 'A',
+    require: 'ngModel',
+    link: function (scope, elem, attrs, ctrl) {
+      elem.bind('blur', function (evt) {
+          //scope.$apply(function () {
+          var valid, value = elem.val();
+          console.log("Value:"+value+"|");
+          if(value && value !== ""){
+              valid = (value == 'user1' || value == 'user2') ? "true" : "false";
+              ctrl.$setValidity('invalidName', valid === "true");
+              console.log("check:"+(valid === "true"));
+          }
+          //});
+        });
+      }
+    }
+  }
+);
+	</script>
+    </head>
+    <body ng-app="myApp">
+        <div>
+    <form name="userData" action="#" ng-controller="UserController" ng-submit="createUser()">
+        
+        User name:    <input type="text" name="name" ng-model="form.name" ng-blur="userCheck()">
+        <span ng-show="userData.name.$error.invalidName">2This user name already taken!</span>
+        <br/> <br/>
+        First name:    <input type="text" ng-model="form.firstname">    <br/><br/>
+        Last name:    <input type="text" ng-model="form.lastname">    <br/><br/>
+        Email Address: <input type="text" ng-model="form.email"> <br/><br/>
+        Password: <input type="password" ng-model="form.password1"> <br/><br/>
+        Retype password: <input type="password" ng-model="form.password2"> <br/><br/>
+        <input type="submit" ngClick="Submit">
+            
+        </form>
+</div>
+
+    </body>
+</html>

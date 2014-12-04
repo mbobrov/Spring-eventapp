@@ -27,12 +27,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean checkName(String userName) {
+        return (repository.findByName(userName)).size() > 0;
+    }
+
+    @Override
     @Transactional
     public User create(@NotNull @Valid final User user) {
         LOGGER.debug("Creating {}", user);
-        List<User> existing = repository.findByName(user.getName());//.findOne(user.getId());
-        if (existing.size() > 0) {
-            throw new UserAlreadyExistsException("There already exists a user with username: "+user.getName());
+        //List<User> existing = repository.findByName(user.getName());//.findOne(user.getId());
+        if (checkName(user.getName())) {
+            throw new UserAlreadyExistsException("User with username "+user.getName()+" already exists!", user.getName());
         }
         return repository.save(user);
     }

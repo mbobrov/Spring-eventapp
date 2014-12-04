@@ -1,13 +1,46 @@
 <div>
-    <form name="userData" action="#" ng-controller="UserController" ng-submit="createUser()">
+    <form name="userData" action="#" ng-controller="UserController">
 
-        User name:    <input type="text" ng-model="form.name">    <br/><br/>
-        First name:    <input type="text" ng-model="form.firstname">    <br/><br/>
-        Last name:    <input type="text" ng-model="form.lastname">    <br/><br/>
-        Email Address: <input type="text" ng-model="form.email"> <br/><br/>
-        Password: <input type="password" ng-model="form.password1"> <br/><br/>
-        Retype password: <input type="password" ng-model="form.password2"> <br/><br/>
-        <input type="submit" ngClick="Submit">
+        User name:    <input type="text" name="name" ng-model="form.name" ng-blur="userCheck()">
+        <span ng-show="userData.name.$error.invalidName">This user name already taken!</span><br/>
+        <span ng-show="userData.name.$error.server">
+            <ul>
+                <li ng-repeat="msg in userData.name.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        First name:    <input type="text" name="firstname" ng-model="form.firstname">    <br/>
+        <span ng-show="userData.firstname.$error.server">
+            <ul>
+                <li ng-repeat="msg in userData.firstname.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Last name:    <input type="text" name="lastname" ng-model="form.lastname">    <br/>
+        <span ng-show="userData.lastname.$error.server">
+            <ul>
+                <li ng-repeat="msg in userData.lastname.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Email Address: <input type="text" name="email" ng-model="form.email"><br/>
+        <span ng-show="userData.email.$error.server">
+            <ul>
+                <li ng-repeat="msg in userData.email.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Password: <input type="password" name="password" ng-model="form.password1"> <br/>
+        <span ng-show="userData.password.$error.server">
+            <ul>
+                <li ng-repeat="msg in userData.password.$error.serverMsg">{{msg}}</li>
+            </ul>
+        </span>
+        <br/>
+        Retype password: <input type="password" name="password2" ng-model="form.password2" ng-blur="pswdCheck()">
+        <span ng-show="userData.password2.$error.mismatch">Two passwords entered do not match!</span><br/>
+        <br/><br/>
+        <input type="submit" ng-click="submitUser($event)">
 
     </form>
 </div>

@@ -8,6 +8,8 @@ public interface UserService {
 
     User create(User user);
 
+    boolean checkName(String userName);
+
     User save(User user);
 
     User getUser(Long userId);

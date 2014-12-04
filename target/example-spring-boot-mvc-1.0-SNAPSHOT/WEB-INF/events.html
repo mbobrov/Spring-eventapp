@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Events</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.26/angular-route.js"></script>
+        <script src="js/eventapp.js"></script>
+    </head>
+    <body ng-app="EventApp">
+        <div>
+            <ul>
+                <li><a href="#/events/add">Add New Event</a></li>
+                <li><a href="#/events/list">Show All Events</a></li>
+            </ul>
+            <a href="index.html">Users</a>
+        </div>
+        <!-- ng-view directive to tell AngularJS where to inject content pages -->
+        <div ng-view></div>
+    </body>
+</html>
